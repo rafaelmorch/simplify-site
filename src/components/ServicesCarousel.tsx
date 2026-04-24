@@ -16,7 +16,7 @@ import {
 
 const iconProps = {
   size: 42,
-  weight: "thin",
+  weight: "thin" as const,
   color: "#FACC15",
 };
 
