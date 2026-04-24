@@ -1,4 +1,41 @@
+"use client";
+
+import { useLanguage } from "./LanguageProvider";
+
 export default function Header() {
+  const { language, setLanguage } = useLanguage();
+
+  const menu = {
+    pt: {
+      home: "Início",
+      about: "Sobre",
+      services: "Serviços",
+      cta: "Começar",
+    },
+    en: {
+      home: "Home",
+      about: "About",
+      services: "Services",
+      cta: "Get Started",
+    },
+    es: {
+      home: "Inicio",
+      about: "Sobre",
+      services: "Servicios",
+      cta: "Comenzar",
+    },
+  };
+
+  const buttonStyle = (current: string) => ({
+    backgroundColor: language === current ? "#FACC15" : "transparent",
+    color: language === current ? "#111827" : "#ffffff",
+    border: "1px solid #C0C0C0",
+    padding: "6px 10px",
+    borderRadius: "4px",
+    cursor: "pointer",
+    fontWeight: 600,
+  });
+
   return (
     <header
       style={{
@@ -35,32 +72,45 @@ export default function Header() {
             display: "flex",
             flexWrap: "wrap",
             gap: "14px",
-            justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <a href="/" style={{ color: "#ffffff", fontSize: "15px" }}>
-            Home
+          <a href="/" style={{ color: "#ffffff" }}>
+            {menu[language].home}
           </a>
-          <a href="/about" style={{ color: "#ffffff", fontSize: "15px" }}>
-            About
+
+          <a href="/about" style={{ color: "#ffffff" }}>
+            {menu[language].about}
           </a>
-          <a href="/services" style={{ color: "#ffffff", fontSize: "15px" }}>
-            Services
+
+          <a href="/services" style={{ color: "#ffffff" }}>
+            {menu[language].services}
           </a>
+
           <a
-            href="/contact"
+            href="/assessment"
             style={{
               color: "#111827",
               backgroundColor: "#FACC15",
               padding: "8px 16px",
               borderRadius: "6px",
               fontWeight: 600,
-              fontSize: "15px",
             }}
           >
-            Contact
+            {menu[language].cta}
           </a>
+
+          <div style={{ display: "flex", gap: "8px" }}>
+            <button onClick={() => setLanguage("pt")} style={buttonStyle("pt")}>
+              PT
+            </button>
+            <button onClick={() => setLanguage("en")} style={buttonStyle("en")}>
+              EN
+            </button>
+            <button onClick={() => setLanguage("es")} style={buttonStyle("es")}>
+              ES
+            </button>
+          </div>
         </nav>
       </div>
     </header>

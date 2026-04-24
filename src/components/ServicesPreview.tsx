@@ -1,7 +1,29 @@
+"use client";
+
 import { siteData } from "../data/site";
+import { useLanguage } from "./LanguageProvider";
 
 export default function ServicesPreview() {
-  const content = siteData.pt;
+  const { language } = useLanguage();
+  const content = siteData[language];
+
+  const sectionText = {
+    pt: {
+      title: "Nossos serviços",
+      subtitle:
+        "Soluções práticas para organizar sua operação, economizar tempo e trazer mais eficiência para o dia a dia.",
+    },
+    en: {
+      title: "Our services",
+      subtitle:
+        "Practical solutions to organize your operation, save time, and bring more efficiency to daily work.",
+    },
+    es: {
+      title: "Nuestros servicios",
+      subtitle:
+        "Soluciones prácticas para organizar su operación, ahorrar tiempo y brindar más eficiencia al día a día.",
+    },
+  };
 
   return (
     <section
@@ -11,12 +33,7 @@ export default function ServicesPreview() {
         backgroundColor: "#ffffff",
       }}
     >
-      <div
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-        }}
-      >
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: "50px" }}>
           <h2
             style={{
@@ -26,8 +43,9 @@ export default function ServicesPreview() {
               marginBottom: "12px",
             }}
           >
-            Nossos serviços
+            {sectionText[language].title}
           </h2>
+
           <p
             style={{
               fontSize: "clamp(16px, 3vw, 18px)",
@@ -37,7 +55,7 @@ export default function ServicesPreview() {
               margin: "0 auto",
             }}
           >
-            Soluções práticas para organizar sua operação, economizar tempo e trazer mais eficiência para o dia a dia.
+            {sectionText[language].subtitle}
           </p>
         </div>
 

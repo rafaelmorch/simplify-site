@@ -1,7 +1,21 @@
+"use client";
+
+import { useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
 export default function AssessmentPage() {
+  const [message, setMessage] = useState("");
+  const [response, setResponse] = useState("");
+
+  const handleAnalyze = () => {
+    if (!message) return;
+
+    setResponse(
+      "Com base no que você descreveu, parece que seu negócio precisa de mais organização nos processos e redução de tarefas manuais. Podemos te ajudar a estruturar isso com soluções simples que economizam tempo e aumentam a eficiência."
+    );
+  };
+
   return (
     <main>
       <Header />
@@ -9,93 +23,113 @@ export default function AssessmentPage() {
       <section
         style={{
           backgroundColor: "#ffffff",
-          color: "#111827",
-          padding: "90px 20px",
+          padding: "100px 20px",
           textAlign: "center",
-          borderBottom: "1px solid #e5e7eb",
         }}
       >
-        <div
-          style={{
-            maxWidth: "900px",
-            margin: "0 auto",
-          }}
-        >
-          <p
-            style={{
-              fontSize: "14px",
-              fontWeight: 700,
-              letterSpacing: "1px",
-              color: "#DC2626",
-              marginBottom: "14px",
-              textTransform: "uppercase",
-            }}
-          >
-            Diagnóstico
-          </p>
-
-          <h1
-            style={{
-              fontSize: "clamp(34px, 7vw, 44px)",
-              fontWeight: 700,
-              marginBottom: "20px",
-              lineHeight: 1.1,
-            }}
-          >
-            Conte para nós o que seu negócio precisa
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <h1 style={{ fontSize: "40px", marginBottom: "20px", color: "#111827" }}>
+            O que está travando o seu negócio hoje?
           </h1>
 
-          <p
-            style={{
-              fontSize: "clamp(17px, 3vw, 18px)",
-              color: "#4b5563",
-              lineHeight: 1.7,
-              maxWidth: "780px",
-              margin: "0 auto",
-            }}
-          >
-            Responda algumas perguntas e vamos entender melhor sua operação para identificar a melhor solução para o seu negócio.
-          </p>
-        </div>
-      </section>
-
-      <section
-        style={{
-          maxWidth: "900px",
-          margin: "0 auto",
-          padding: "80px 20px",
-        }}
-      >
-        <div
-          style={{
-            borderTop: "4px solid #DC2626",
-            borderLeft: "1px solid #e5e7eb",
-            borderRight: "1px solid #e5e7eb",
-            borderBottom: "1px solid #e5e7eb",
-            backgroundColor: "#f9fafb",
-            padding: "32px",
-          }}
-        >
-          <p
-            style={{
-              fontSize: "18px",
-              fontWeight: 600,
-              color: "#111827",
-              marginBottom: "20px",
-            }}
-          >
-            Em breve, aqui teremos um formulário inteligente com IA.
+          <p style={{ color: "#4b5563", marginBottom: "30px" }}>
+            Preencha seus dados e descreva sua situação. Assim podemos entender melhor seu negócio.
           </p>
 
-          <p
-            style={{
-              fontSize: "16px",
-              lineHeight: 1.7,
-              color: "#4b5563",
-            }}
+          <form
+            name="assessment"
+            method="POST"
+            data-netlify="true"
+            style={{ display: "flex", flexDirection: "column", gap: "16px" }}
           >
-            Essa página vai ajudar a coletar as informações do cliente, entender prioridades, organizar demandas e indicar soluções sob medida.
-          </p>
+            <input type="hidden" name="form-name" value="assessment" />
+
+            <input
+              name="name"
+              type="text"
+              placeholder="Seu nome"
+              required
+              style={{
+                padding: "14px",
+                border: "1px solid #e5e7eb",
+                borderRadius: "6px",
+              }}
+            />
+
+            <input
+              name="email"
+              type="email"
+              placeholder="Seu email"
+              required
+              style={{
+                padding: "14px",
+                border: "1px solid #e5e7eb",
+                borderRadius: "6px",
+              }}
+            />
+
+            <textarea
+              name="message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Ex: estou perdendo tempo com tarefas manuais..."
+              required
+              style={{
+                width: "100%",
+                height: "140px",
+                padding: "15px",
+                border: "1px solid #e5e7eb",
+                borderRadius: "6px",
+              }}
+            />
+
+            <button
+              type="button"
+              onClick={handleAnalyze}
+              style={{
+                backgroundColor: "#DC2626",
+                color: "#fff",
+                padding: "14px 28px",
+                borderRadius: "6px",
+                fontWeight: 700,
+                border: "none",
+                cursor: "pointer",
+              }}
+            >
+              Analisar meu caso
+            </button>
+
+            <button
+              type="submit"
+              style={{
+                backgroundColor: "#111827",
+                color: "#fff",
+                padding: "14px 28px",
+                borderRadius: "6px",
+                fontWeight: 700,
+                border: "none",
+                cursor: "pointer",
+              }}
+            >
+              Enviar para Simplify
+            </button>
+          </form>
+
+          {response && (
+            <div
+              style={{
+                marginTop: "30px",
+                backgroundColor: "#f9fafb",
+                border: "1px solid #e5e7eb",
+                padding: "20px",
+                borderRadius: "6px",
+                textAlign: "left",
+              }}
+            >
+              <strong>Resultado:</strong>
+              <p style={{ marginTop: "10px", color: "#4b5563" }}>{response}</p>
+            </div>
+          )}
         </div>
       </section>
 

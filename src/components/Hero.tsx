@@ -1,7 +1,26 @@
+"use client";
+
 import { siteData } from "../data/site";
+import { useLanguage } from "./LanguageProvider";
 
 export default function Hero() {
-  const content = siteData.pt;
+  const { language } = useLanguage();
+  const content = siteData[language];
+
+  const buttons = {
+    pt: {
+      primary: "Receber solução personalizada",
+      secondary: "Ver como funciona",
+    },
+    en: {
+      primary: "Get a personalized solution",
+      secondary: "See how it works",
+    },
+    es: {
+      primary: "Recibir solución personalizada",
+      secondary: "Ver cómo funciona",
+    },
+  };
 
   return (
     <section
@@ -13,7 +32,6 @@ export default function Hero() {
         overflow: "hidden",
       }}
     >
-      {/* VIDEO */}
       <video
         autoPlay
         loop
@@ -31,7 +49,6 @@ export default function Hero() {
         <source src="/videos/hero.mp4" type="video/mp4" />
       </video>
 
-      {/* OVERLAY ESCURO */}
       <div
         style={{
           position: "absolute",
@@ -40,7 +57,6 @@ export default function Hero() {
         }}
       />
 
-      {/* CONTEÚDO */}
       <div
         style={{
           position: "relative",
@@ -90,7 +106,7 @@ export default function Hero() {
               fontWeight: 700,
             }}
           >
-            Receber solução personalizada
+            {buttons[language].primary}
           </a>
 
           <a
@@ -103,7 +119,7 @@ export default function Hero() {
               fontWeight: 600,
             }}
           >
-            Ver como funciona
+            {buttons[language].secondary}
           </a>
         </div>
       </div>

@@ -1,4 +1,33 @@
+"use client";
+
+import { useLanguage } from "./LanguageProvider";
+
 export default function AboutPreview() {
+  const { language } = useLanguage();
+
+  const content = {
+    pt: {
+      label: "Sobre nós",
+      title: "Criada para simplificar o crescimento de pequenos negócios",
+      p1: "A Simplify ajuda empresas a organizar suas atividades, melhorar seus processos e criar soluções sob medida para uma operação mais eficiente.",
+      p2: "Nosso foco é trazer clareza, economia de tempo e mais controle para o dia a dia do seu negócio.",
+    },
+    en: {
+      label: "About us",
+      title: "Built to simplify growth for small businesses",
+      p1: "Simplify helps businesses organize their activities, improve processes, and create tailored solutions for a more efficient operation.",
+      p2: "Our focus is to bring clarity, time savings, and more control to your daily business operations.",
+    },
+    es: {
+      label: "Sobre nosotros",
+      title: "Creada para simplificar el crecimiento de pequeños negocios",
+      p1: "Simplify ayuda a las empresas a organizar sus actividades, mejorar procesos y crear soluciones a medida para una operación más eficiente.",
+      p2: "Nuestro enfoque es brindar claridad, ahorro de tiempo y más control al día a día de su negocio.",
+    },
+  };
+
+  const section = content[language];
+
   return (
     <section
       style={{
@@ -39,7 +68,7 @@ export default function AboutPreview() {
               textTransform: "uppercase",
             }}
           >
-            About Us
+            {section.label}
           </p>
 
           <h2
@@ -51,7 +80,7 @@ export default function AboutPreview() {
               lineHeight: 1.15,
             }}
           >
-            Built to simplify growth for small businesses
+            {section.title}
           </h2>
 
           <p
@@ -62,8 +91,7 @@ export default function AboutPreview() {
               marginBottom: "18px",
             }}
           >
-            Simplify was created to help small businesses organize operations,
-            improve visibility, and create practical systems that support real growth.
+            {section.p1}
           </p>
 
           <p
@@ -73,8 +101,7 @@ export default function AboutPreview() {
               color: "#4b5563",
             }}
           >
-            We focus on clear structure, smart execution, and solutions that make
-            day-to-day operations easier, stronger, and more scalable.
+            {section.p2}
           </p>
         </div>
       </div>

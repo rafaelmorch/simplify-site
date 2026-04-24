@@ -1,4 +1,99 @@
+"use client";
+
+import { useLanguage } from "./LanguageProvider";
+
 export default function WhyChoose() {
+  const { language } = useLanguage();
+
+  const content = {
+    pt: {
+      label: "Como ajudamos",
+      title: "Soluções pensadas para organizar, simplificar e fortalecer sua operação",
+      subtitle:
+        "A Simplify ajuda empresas a ganhar mais clareza, economizar tempo e estruturar melhor suas atividades com soluções sob medida para a realidade do negócio.",
+      items: [
+        {
+          title: "Mais organização",
+          description:
+            "Estruturamos informações, rotinas e atividades para que sua operação funcione de forma mais clara e eficiente.",
+        },
+        {
+          title: "Economia de tempo",
+          description:
+            "Reduzimos tarefas desnecessárias e criamos soluções que ajudam você a ganhar tempo no dia a dia.",
+        },
+        {
+          title: "Soluções sob medida",
+          description:
+            "Cada empresa tem uma realidade. Por isso, trabalhamos com soluções personalizadas para o que você realmente precisa.",
+        },
+        {
+          title: "Mais controle",
+          description:
+            "Com mais visibilidade sobre processos e informações, fica mais fácil tomar decisões e crescer com segurança.",
+        },
+      ],
+    },
+    en: {
+      label: "How we help",
+      title: "Solutions designed to organize, simplify, and strengthen your operation",
+      subtitle:
+        "Simplify helps businesses gain clarity, save time, and better structure their activities with tailored solutions for their reality.",
+      items: [
+        {
+          title: "More organization",
+          description:
+            "We structure information, routines, and activities so your operation works more clearly and efficiently.",
+        },
+        {
+          title: "Time savings",
+          description:
+            "We reduce unnecessary tasks and create solutions that help you save time in your daily work.",
+        },
+        {
+          title: "Tailored solutions",
+          description:
+            "Every business has its own reality. That is why we build customized solutions for what you actually need.",
+        },
+        {
+          title: "More control",
+          description:
+            "With better visibility over processes and information, it becomes easier to make decisions and grow with confidence.",
+        },
+      ],
+    },
+    es: {
+      label: "Cómo ayudamos",
+      title: "Soluciones pensadas para organizar, simplificar y fortalecer su operación",
+      subtitle:
+        "Simplify ayuda a las empresas a ganar claridad, ahorrar tiempo y estructurar mejor sus actividades con soluciones a medida para su realidad.",
+      items: [
+        {
+          title: "Más organización",
+          description:
+            "Estructuramos información, rutinas y actividades para que su operación funcione de forma más clara y eficiente.",
+        },
+        {
+          title: "Ahorro de tiempo",
+          description:
+            "Reducimos tareas innecesarias y creamos soluciones que le ayudan a ahorrar tiempo en el día a día.",
+        },
+        {
+          title: "Soluciones a medida",
+          description:
+            "Cada empresa tiene una realidad. Por eso trabajamos con soluciones personalizadas para lo que realmente necesita.",
+        },
+        {
+          title: "Más control",
+          description:
+            "Con más visibilidad sobre procesos e información, es más fácil tomar decisiones y crecer con seguridad.",
+        },
+      ],
+    },
+  };
+
+  const section = content[language];
+
   return (
     <section
       style={{
@@ -9,12 +104,7 @@ export default function WhyChoose() {
         borderBottom: "1px solid #e5e7eb",
       }}
     >
-      <div
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-        }}
-      >
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         <div
           style={{
             textAlign: "center",
@@ -32,7 +122,7 @@ export default function WhyChoose() {
               textTransform: "uppercase",
             }}
           >
-            Como ajudamos
+            {section.label}
           </p>
 
           <h2
@@ -44,17 +134,11 @@ export default function WhyChoose() {
               lineHeight: 1.15,
             }}
           >
-            Soluções pensadas para organizar, simplificar e fortalecer sua operação
+            {section.title}
           </h2>
 
-          <p
-            style={{
-              fontSize: "18px",
-              color: "#4b5563",
-              lineHeight: 1.7,
-            }}
-          >
-            A Simplify ajuda empresas a ganhar mais clareza, economizar tempo e estruturar melhor suas atividades com soluções sob medida para a realidade do negócio.
+          <p style={{ fontSize: "18px", color: "#4b5563", lineHeight: 1.7 }}>
+            {section.subtitle}
           </p>
         </div>
 
@@ -65,133 +149,34 @@ export default function WhyChoose() {
             gap: "24px",
           }}
         >
-          <div
-            style={{
-              padding: "28px",
-              backgroundColor: "#f9fafb",
-              borderTop: "4px solid #DC2626",
-              borderLeft: "1px solid #e5e7eb",
-              borderRight: "1px solid #e5e7eb",
-              borderBottom: "1px solid #e5e7eb",
-            }}
-          >
-            <h3
+          {section.items.map((item) => (
+            <div
+              key={item.title}
               style={{
-                fontSize: "22px",
-                fontWeight: 600,
-                color: "#111827",
-                marginBottom: "12px",
+                padding: "28px",
+                backgroundColor: "#f9fafb",
+                borderTop: "4px solid #DC2626",
+                borderLeft: "1px solid #e5e7eb",
+                borderRight: "1px solid #e5e7eb",
+                borderBottom: "1px solid #e5e7eb",
               }}
             >
-              Mais organização
-            </h3>
+              <h3
+                style={{
+                  fontSize: "22px",
+                  fontWeight: 600,
+                  color: "#111827",
+                  marginBottom: "12px",
+                }}
+              >
+                {item.title}
+              </h3>
 
-            <p
-              style={{
-                fontSize: "16px",
-                lineHeight: 1.7,
-                color: "#4b5563",
-              }}
-            >
-              Estruturamos informações, rotinas e atividades para que sua operação funcione de forma mais clara e eficiente.
-            </p>
-          </div>
-
-          <div
-            style={{
-              padding: "28px",
-              backgroundColor: "#f9fafb",
-              borderTop: "4px solid #DC2626",
-              borderLeft: "1px solid #e5e7eb",
-              borderRight: "1px solid #e5e7eb",
-              borderBottom: "1px solid #e5e7eb",
-            }}
-          >
-            <h3
-              style={{
-                fontSize: "22px",
-                fontWeight: 600,
-                color: "#111827",
-                marginBottom: "12px",
-              }}
-            >
-              Economia de tempo
-            </h3>
-
-            <p
-              style={{
-                fontSize: "16px",
-                lineHeight: 1.7,
-                color: "#4b5563",
-              }}
-            >
-              Reduzimos tarefas desnecessárias e criamos soluções que ajudam você a ganhar tempo no dia a dia.
-            </p>
-          </div>
-
-          <div
-            style={{
-              padding: "28px",
-              backgroundColor: "#f9fafb",
-              borderTop: "4px solid #DC2626",
-              borderLeft: "1px solid #e5e7eb",
-              borderRight: "1px solid #e5e7eb",
-              borderBottom: "1px solid #e5e7eb",
-            }}
-          >
-            <h3
-              style={{
-                fontSize: "22px",
-                fontWeight: 600,
-                color: "#111827",
-                marginBottom: "12px",
-              }}
-            >
-              Soluções sob medida
-            </h3>
-
-            <p
-              style={{
-                fontSize: "16px",
-                lineHeight: 1.7,
-                color: "#4b5563",
-              }}
-            >
-              Cada empresa tem uma realidade. Por isso, trabalhamos com soluções personalizadas para o que você realmente precisa.
-            </p>
-          </div>
-
-          <div
-            style={{
-              padding: "28px",
-              backgroundColor: "#f9fafb",
-              borderTop: "4px solid #DC2626",
-              borderLeft: "1px solid #e5e7eb",
-              borderRight: "1px solid #e5e7eb",
-              borderBottom: "1px solid #e5e7eb",
-            }}
-          >
-            <h3
-              style={{
-                fontSize: "22px",
-                fontWeight: 600,
-                color: "#111827",
-                marginBottom: "12px",
-              }}
-            >
-              Mais controle
-            </h3>
-
-            <p
-              style={{
-                fontSize: "16px",
-                lineHeight: 1.7,
-                color: "#4b5563",
-              }}
-            >
-              Com mais visibilidade sobre processos e informações, fica mais fácil tomar decisões e crescer com segurança.
-            </p>
-          </div>
+              <p style={{ fontSize: "16px", lineHeight: 1.7, color: "#4b5563" }}>
+                {item.description}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
