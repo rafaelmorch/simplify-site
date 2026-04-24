@@ -7,13 +7,35 @@ import Footer from "../../components/Footer";
 export default function AssessmentPage() {
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleAnalyze = () => {
+  const handleAnalyze = async () => {
     if (!message) return;
 
-    setResponse(
-      "Com base no que você descreveu, parece que seu negócio precisa de mais organização nos processos e redução de tarefas manuais. Podemos te ajudar a estruturar isso com soluções simples que economizam tempo e aumentam a eficiência."
-    );
+    setLoading(true);
+    setResponse("");
+
+    try {
+      const res = await fetch("/.netlify/functions/analyze", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message }),
+      });
+
+      const data = await res.json();
+
+      if (data.result) {
+        setResponse(data.result);
+      } else {
+        setResponse("Não foi possível gerar a análise agora. Tente novamente.");
+      }
+    } catch (error) {
+      setResponse("Erro ao conectar com a IA. Tente novamente.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -33,7 +55,7 @@ export default function AssessmentPage() {
           </h1>
 
           <p style={{ color: "#4b5563", marginBottom: "30px" }}>
-            Preencha seus dados e descreva sua situação. Assim podemos entender melhor seu negócio.
+            Descreva sua situação e a IA da Simplify vai sugerir uma solução inicial.
           </p>
 
           <form
@@ -86,6 +108,7 @@ export default function AssessmentPage() {
             <button
               type="button"
               onClick={handleAnalyze}
+              disabled={loading}
               style={{
                 backgroundColor: "#DC2626",
                 color: "#fff",
@@ -93,10 +116,11 @@ export default function AssessmentPage() {
                 borderRadius: "6px",
                 fontWeight: 700,
                 border: "none",
-                cursor: "pointer",
+                cursor: loading ? "not-allowed" : "pointer",
+                opacity: loading ? 0.7 : 1,
               }}
             >
-              Analisar meu caso
+              {loading ? "Analisando..." : "Analisar meu caso com IA"}
             </button>
 
             <button
@@ -124,10 +148,13 @@ export default function AssessmentPage() {
                 padding: "20px",
                 borderRadius: "6px",
                 textAlign: "left",
+                whiteSpace: "pre-line",
               }}
             >
-              <strong>Resultado:</strong>
-              <p style={{ marginTop: "10px", color: "#4b5563" }}>{response}</p>
+              <strong>Análise da IA:</strong>
+              <p style={{ marginTop: "10px", color: "#4b5563" }}>
+                {response}
+              </p>
             </div>
           )}
         </div>
