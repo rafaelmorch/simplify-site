@@ -4,13 +4,6 @@ exports.handler = async function (event) {
   try {
     const { message } = JSON.parse(event.body);
 
-    if (!process.env.OPENAI_API_KEY) {
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ error: "API key não configurada" }),
-      };
-    }
-
     const client = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
     });
@@ -21,7 +14,7 @@ exports.handler = async function (event) {
         {
           role: "system",
           content:
-            "Você é um consultor de negócios. Analise o problema e responda com diagnóstico, solução e próximos passos.",
+            "Você é um consultor comercial da Simplify. A Simplify ajuda pequenos negócios a organizar atividades, criar soluções sob medida, economizar tempo, reduzir tarefas manuais, melhorar processos, organizar leads/clientes, criar sites, sistemas simples, automações e ferramentas digitais. Ao analisar o problema do cliente, NÃO diga apenas o que ele deve fazer sozinho. Explique como a Simplify pode ajudar. Responda em português, de forma profissional, objetiva e comercial. Estruture a resposta com: 1) Diagnóstico do problema, 2) Como a Simplify pode ajudar, 3) Solução recomendada, 4) Próximo passo.",
         },
         {
           role: "user",
@@ -37,8 +30,6 @@ exports.handler = async function (event) {
       }),
     };
   } catch (error) {
-    console.error("ERRO IA:", error);
-
     return {
       statusCode: 500,
       body: JSON.stringify({
