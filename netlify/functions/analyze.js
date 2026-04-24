@@ -4,29 +4,24 @@ exports.handler = async function (event) {
   try {
     const { message } = JSON.parse(event.body);
 
-    const openai = new OpenAI({
+    if (!process.env.OPENAI_API_KEY) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: "API key não configurada" }),
+      };
+    }
+
+    const client = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
     });
 
-    const completion = await openai.chat.completions.create({
+    const response = await client.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
         {
           role: "system",
-          content: `
-Você é um consultor especialista em negócios.
-
-Analise o problema do cliente e responda de forma PROFISSIONAL, estruturada e estratégica.
-
-A resposta deve ter:
-
-1. Diagnóstico claro do problema
-2. Oportunidade de melhoria
-3. Solução recomendada (prática)
-4. Próximos passos
-
-Seja direto, inteligente e com linguagem de consultoria.
-          `,
+          content:
+            "Você é um consultor de negócios. Analise o problema e responda com diagnóstico, solução e próximos passos.",
         },
         {
           role: "user",
@@ -38,13 +33,17 @@ Seja direto, inteligente e com linguagem de consultoria.
     return {
       statusCode: 200,
       body: JSON.stringify({
-        result: completion.choices[0].message.content,
+        result: response.choices[0].message.content,
       }),
     };
   } catch (error) {
+    console.error("ERRO IA:", error);
+
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Erro ao processar IA" }),
+      body: JSON.stringify({
+        error: "Erro interno na IA",
+      }),
     };
   }
 };
