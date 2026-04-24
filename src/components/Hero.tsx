@@ -8,39 +8,46 @@ export default function Hero() {
       style={{
         position: "relative",
         width: "100%",
-        padding: "100px 20px",
-        backgroundColor: "#ffffff",
-        color: "#111827",
+        height: "80vh",
+        color: "#ffffff",
         overflow: "hidden",
       }}
     >
+      {/* VIDEO */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          top: 0,
+          left: 0,
+        }}
+      >
+        <source src="/videos/hero.mp4" type="video/mp4" />
+      </video>
+
+      {/* OVERLAY ESCURO */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          backgroundImage:
-            "linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
+          backgroundColor: "rgba(0,0,0,0.6)",
         }}
       />
 
-      <div
-        style={{
-          position: "absolute",
-          top: "20%",
-          left: "10%",
-          width: "300px",
-          height: "300px",
-          background: "radial-gradient(circle, rgba(220,38,38,0.08), transparent 70%)",
-        }}
-      />
-
+      {/* CONTEÚDO */}
       <div
         style={{
           position: "relative",
           maxWidth: "1000px",
           margin: "0 auto",
           textAlign: "center",
+          padding: "120px 20px",
         }}
       >
         <h1
@@ -57,11 +64,9 @@ export default function Hero() {
         <p
           style={{
             fontSize: "clamp(17px, 3vw, 20px)",
-            color: "#4b5563",
+            color: "#e5e7eb",
             marginBottom: "30px",
             lineHeight: 1.6,
-            maxWidth: "860px",
-            marginInline: "auto",
           }}
         >
           {content.subheadline}
@@ -76,7 +81,7 @@ export default function Hero() {
           }}
         >
           <a
-            href="/contact"
+            href="/assessment"
             style={{
               padding: "14px 28px",
               backgroundColor: "#DC2626",
@@ -92,8 +97,8 @@ export default function Hero() {
             href="/services"
             style={{
               padding: "14px 28px",
-              border: "1px solid #C0C0C0",
-              color: "#111827",
+              border: "1px solid #ffffff",
+              color: "#ffffff",
               borderRadius: "6px",
               fontWeight: 600,
             }}
