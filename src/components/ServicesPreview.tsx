@@ -26,7 +26,7 @@ export default function ServicesPreview() {
   };
 
   return (
-    <section
+    <section id="services"
       style={{
         width: "100%",
         padding: "80px 20px",

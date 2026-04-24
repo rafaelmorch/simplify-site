@@ -29,7 +29,7 @@ export default function AboutPreview() {
   const section = content[language];
 
   return (
-    <section
+    <section id="about" id="about"
       style={{
         width: "100%",
         padding: "90px 20px",

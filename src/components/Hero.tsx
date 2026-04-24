@@ -2,6 +2,7 @@
 
 import { siteData } from "../data/site";
 import { useLanguage } from "./LanguageProvider";
+import ServicesCarousel from "./ServicesCarousel";
 
 export default function Hero() {
   const { language } = useLanguage();
@@ -24,10 +25,12 @@ export default function Hero() {
 
   return (
     <section
+      id="home"
       style={{
         position: "relative",
         width: "100%",
-        height: "80vh",
+        height: "92vh",
+        minHeight: "760px",
         color: "#ffffff",
         overflow: "hidden",
       }}
@@ -53,7 +56,7 @@ export default function Hero() {
         style={{
           position: "absolute",
           inset: 0,
-          backgroundColor: "rgba(0,0,0,0.6)",
+          backgroundColor: "rgba(0,0,0,0.62)",
         }}
       />
 
@@ -63,7 +66,7 @@ export default function Hero() {
           maxWidth: "1000px",
           margin: "0 auto",
           textAlign: "center",
-          padding: "120px 20px",
+          padding: "110px 20px 240px",
         }}
       >
         <h1
@@ -97,7 +100,7 @@ export default function Hero() {
           }}
         >
           <a
-            href="/assessment"
+            href="#assessment"
             style={{
               padding: "14px 28px",
               backgroundColor: "#DC2626",
@@ -110,7 +113,7 @@ export default function Hero() {
           </a>
 
           <a
-            href="/services"
+            href="#services"
             style={{
               padding: "14px 28px",
               border: "1px solid #ffffff",
@@ -123,6 +126,8 @@ export default function Hero() {
           </a>
         </div>
       </div>
+
+      <ServicesCarousel />
     </section>
   );
 }

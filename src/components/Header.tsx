@@ -8,21 +8,24 @@ export default function Header() {
   const menu = {
     pt: {
       home: "Início",
-      about: "Sobre",
+      problems: "Problemas",
       services: "Serviços",
-      cta: "Começar",
+      about: "Sobre",
+      cta: "Diagnóstico",
     },
     en: {
       home: "Home",
-      about: "About",
+      problems: "Problems",
       services: "Services",
-      cta: "Get Started",
+      about: "About",
+      cta: "Assessment",
     },
     es: {
       home: "Inicio",
-      about: "Sobre",
+      problems: "Problemas",
       services: "Servicios",
-      cta: "Comenzar",
+      about: "Sobre",
+      cta: "Diagnóstico",
     },
   };
 
@@ -43,6 +46,9 @@ export default function Header() {
         padding: "20px",
         backgroundColor: "#111827",
         borderBottom: "2px solid #C0C0C0",
+        position: "sticky",
+        top: 0,
+        zIndex: 50,
       }}
     >
       <div
@@ -56,7 +62,8 @@ export default function Header() {
           gap: "16px",
         }}
       >
-        <div
+        <a
+          href="#home"
           style={{
             fontSize: "26px",
             fontWeight: 700,
@@ -65,7 +72,7 @@ export default function Header() {
           }}
         >
           SIMPLIFY
-        </div>
+        </a>
 
         <nav
           style={{
@@ -75,20 +82,24 @@ export default function Header() {
             alignItems: "center",
           }}
         >
-          <a href="/" style={{ color: "#ffffff" }}>
+          <a href="#home" style={{ color: "#ffffff" }}>
             {menu[language].home}
           </a>
 
-          <a href="/about" style={{ color: "#ffffff" }}>
-            {menu[language].about}
+          <a href="#problems" style={{ color: "#ffffff" }}>
+            {menu[language].problems}
           </a>
 
-          <a href="/services" style={{ color: "#ffffff" }}>
+          <a href="#services" style={{ color: "#ffffff" }}>
             {menu[language].services}
           </a>
 
+          <a href="#about" style={{ color: "#ffffff" }}>
+            {menu[language].about}
+          </a>
+
           <a
-            href="/assessment"
+            href="#assessment"
             style={{
               color: "#111827",
               backgroundColor: "#FACC15",
