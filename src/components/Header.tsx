@@ -1,10 +1,19 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useLanguage } from "./LanguageProvider";
 
 export default function Header() {
   const { language, setLanguage } = useLanguage();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkSize = () => setIsMobile(window.innerWidth <= 768);
+    checkSize();
+    window.addEventListener("resize", checkSize);
+    return () => window.removeEventListener("resize", checkSize);
+  }, []);
 
   const menu = {
     pt: [
@@ -44,10 +53,11 @@ export default function Header() {
         style={{
           maxWidth: "1280px",
           margin: "0 auto",
-          padding: "16px 24px",
+          padding: isMobile ? "10px 14px" : "16px 24px",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
+          gap: "12px",
         }}
       >
         <Link
@@ -57,14 +67,15 @@ export default function Header() {
             alignItems: "center",
             gap: "12px",
             textDecoration: "none",
+            flexShrink: 0,
           }}
         >
           <img
             src="/images/logo.png"
             alt="Simplify"
             style={{
-              width: "42px",
-              height: "42px",
+              width: isMobile ? "34px" : "42px",
+              height: isMobile ? "34px" : "42px",
               objectFit: "contain",
             }}
           />
@@ -73,7 +84,7 @@ export default function Header() {
             style={{
               color: "#ffffff",
               fontFamily: "var(--font-gemunu)",
-              fontSize: "30px",
+              fontSize: isMobile ? "24px" : "30px",
               fontWeight: 700,
               letterSpacing: "1px",
             }}
@@ -86,25 +97,26 @@ export default function Header() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "28px",
+            gap: isMobile ? "0" : "28px",
           }}
         >
-          {menu[language].map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              style={{
-                color: "#ffffff",
-                textDecoration: "none",
-                fontFamily: "var(--font-gemunu)",
-                fontSize: "18px",
-                fontWeight: 600,
-                letterSpacing: "0.6px",
-              }}
-            >
-              {item.label}
-            </a>
-          ))}
+          {!isMobile &&
+            menu[language].map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                style={{
+                  color: "#ffffff",
+                  textDecoration: "none",
+                  fontFamily: "var(--font-gemunu)",
+                  fontSize: "18px",
+                  fontWeight: 600,
+                  letterSpacing: "0.6px",
+                }}
+              >
+                {item.label}
+              </a>
+            ))}
 
           <select
             value={language}
@@ -114,7 +126,8 @@ export default function Header() {
               color: "#ffffff",
               border: "1px solid rgba(255,255,255,0.12)",
               borderRadius: "8px",
-              padding: "6px 10px",
+              padding: isMobile ? "5px 8px" : "6px 10px",
+              fontSize: isMobile ? "13px" : "14px",
             }}
           >
             <option value="pt">PT</option>
