@@ -1,9 +1,30 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useLanguage } from "./LanguageProvider";
 
 export default function AboutPreview() {
   const { language } = useLanguage();
+  const [currentImage, setCurrentImage] = useState(0);
+
+  const images = [
+    "/images/about/1.png",
+    "/images/about/2.png",
+    "/images/about/3.png",
+    "/images/about/4.png",
+    "/images/about/5.png",
+    "/images/about/6.png",
+    "/images/about/7.png",
+    "/images/about/8.png",
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [images.length]);
 
   const content = {
     pt: {
@@ -53,8 +74,22 @@ export default function AboutPreview() {
               minHeight: "320px",
               backgroundColor: "#111827",
               borderTop: "4px solid #FACC15",
+              overflow: "hidden",
+              position: "relative",
             }}
-          />
+          >
+            <img
+              src={images[currentImage]}
+              alt=""
+              style={{
+                width: "100%",
+                height: "320px",
+                objectFit: "cover",
+                display: "block",
+                transition: "opacity 0.6s ease",
+              }}
+            />
+          </div>
         </div>
 
         <div>

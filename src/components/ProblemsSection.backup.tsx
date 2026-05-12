@@ -162,7 +162,7 @@ export default function ProblemsSection() {
           <p
             style={{
               fontSize: "14px",
-              fontFamily: "Montserrat, sans-serif", fontWeight: 800,
+              fontWeight: 800,
               letterSpacing: "1px",
               color: "#DC2626",
               marginBottom: "14px",
@@ -208,7 +208,7 @@ export default function ProblemsSection() {
               className="premium-card-hover"
               style={{
                 background: "rgba(255,255,255,0.82)",
-                border: "1.2px solid rgba(255,229,0,0.9)",
+                border: "1px solid rgba(229,231,235,0.9)",
                 borderRadius: "10px",
                 padding: "24px",
                 minHeight: "210px",
@@ -241,7 +241,7 @@ export default function ProblemsSection() {
                 <h3
                   style={{
                     fontSize: "17px",
-                    fontFamily: "Montserrat, sans-serif", fontWeight: 800,
+                    fontWeight: 800,
                     color: "#111827",
                     marginBottom: "10px",
                     lineHeight: 1.2,

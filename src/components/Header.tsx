@@ -1,127 +1,126 @@
 "use client";
 
+import Link from "next/link";
 import { useLanguage } from "./LanguageProvider";
 
 export default function Header() {
   const { language, setLanguage } = useLanguage();
 
   const menu = {
-    pt: {
-      home: "Início",
-      problems: "Problemas",
-      services: "Serviços",
-      about: "Sobre",
-      cta: "Diagnóstico",
-    },
-    en: {
-      home: "Home",
-      problems: "Problems",
-      services: "Services",
-      about: "About",
-      cta: "Assessment",
-    },
-    es: {
-      home: "Inicio",
-      problems: "Problemas",
-      services: "Servicios",
-      about: "Sobre",
-      cta: "Diagnóstico",
-    },
+    pt: [
+      { label: "Problemas", href: "#problems" },
+      { label: "Soluções", href: "#services" },
+      { label: "Sobre", href: "#about" },
+      { label: "Diagnóstico", href: "#assessment" },
+    ],
+    en: [
+      { label: "Problems", href: "#problems" },
+      { label: "Solutions", href: "#services" },
+      { label: "About", href: "#about" },
+      { label: "Assessment", href: "#assessment" },
+    ],
+    es: [
+      { label: "Problemas", href: "#problems" },
+      { label: "Soluciones", href: "#services" },
+      { label: "Sobre", href: "#about" },
+      { label: "Diagnóstico", href: "#assessment" },
+    ],
   };
-
-  const buttonStyle = (current: string) => ({
-    backgroundColor: language === current ? "#FACC15" : "transparent",
-    color: language === current ? "#111827" : "#ffffff",
-    border: "1px solid #C0C0C0",
-    padding: "6px 10px",
-    borderRadius: "4px",
-    cursor: "pointer",
-    fontWeight: 600,
-  });
 
   return (
     <header
       style={{
-        width: "100%",
-        padding: "20px",
-        backgroundColor: "#111827",
-        borderBottom: "2px solid #C0C0C0",
-        position: "sticky",
+        position: "fixed",
         top: 0,
-        zIndex: 50,
+        left: 0,
+        width: "100%",
+        zIndex: 1000,
+        background: "rgba(0,0,0,0.55)",
+        backdropFilter: "blur(14px)",
+        borderBottom: "1px solid rgba(255,255,255,0.06)",
       }}
     >
       <div
         style={{
-          maxWidth: "1200px",
+          maxWidth: "1280px",
           margin: "0 auto",
+          padding: "16px 24px",
           display: "flex",
-          flexWrap: "wrap",
           alignItems: "center",
           justifyContent: "space-between",
-          gap: "16px",
         }}
       >
-        <a
-          href="#home"
+        <Link
+          href="/"
           style={{
-            fontSize: "26px",
-            fontWeight: 700,
-            color: "#C0C0C0",
-            letterSpacing: "1px",
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+            textDecoration: "none",
           }}
         >
-          SIMPLIFY
-        </a>
+          <img
+            src="/images/logo.png"
+            alt="Simplify"
+            style={{
+              width: "42px",
+              height: "42px",
+              objectFit: "contain",
+            }}
+          />
+
+          <span
+            style={{
+              color: "#ffffff",
+              fontFamily: "var(--font-gemunu)",
+              fontSize: "30px",
+              fontWeight: 700,
+              letterSpacing: "1px",
+            }}
+          >
+            Simplify
+          </span>
+        </Link>
 
         <nav
           style={{
             display: "flex",
-            flexWrap: "wrap",
-            gap: "14px",
             alignItems: "center",
+            gap: "28px",
           }}
         >
-          <a href="#home" style={{ color: "#ffffff" }}>
-            {menu[language].home}
-          </a>
+          {menu[language].map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              style={{
+                color: "#ffffff",
+                textDecoration: "none",
+                fontFamily: "var(--font-gemunu)",
+                fontSize: "18px",
+                fontWeight: 600,
+                letterSpacing: "0.6px",
+              }}
+            >
+              {item.label}
+            </a>
+          ))}
 
-          <a href="#problems" style={{ color: "#ffffff" }}>
-            {menu[language].problems}
-          </a>
-
-          <a href="#services" style={{ color: "#ffffff" }}>
-            {menu[language].services}
-          </a>
-
-          <a href="#about" style={{ color: "#ffffff" }}>
-            {menu[language].about}
-          </a>
-
-          <a
-            href="#assessment"
+          <select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value as any)}
             style={{
-              color: "#111827",
-              backgroundColor: "#FACC15",
-              padding: "8px 16px",
-              borderRadius: "6px",
-              fontWeight: 600,
+              backgroundColor: "#111827",
+              color: "#ffffff",
+              border: "1px solid rgba(255,255,255,0.12)",
+              borderRadius: "8px",
+              padding: "6px 10px",
             }}
           >
-            {menu[language].cta}
-          </a>
-
-          <div style={{ display: "flex", gap: "8px" }}>
-            <button onClick={() => setLanguage("pt")} style={buttonStyle("pt")}>
-              PT
-            </button>
-            <button onClick={() => setLanguage("en")} style={buttonStyle("en")}>
-              EN
-            </button>
-            <button onClick={() => setLanguage("es")} style={buttonStyle("es")}>
-              ES
-            </button>
-          </div>
+            <option value="pt">PT</option>
+            <option value="en">EN</option>
+            <option value="es">ES</option>
+          </select>
         </nav>
       </div>
     </header>

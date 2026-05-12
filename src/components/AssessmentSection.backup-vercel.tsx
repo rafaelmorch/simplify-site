@@ -57,7 +57,7 @@ export default function AssessmentSection() {
     setResponse("");
 
     try {
-      const res = await fetch("/api/analyze", {
+      const res = await fetch("/.netlify/functions/analyze", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
