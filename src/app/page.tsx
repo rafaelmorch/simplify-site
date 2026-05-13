@@ -2,7 +2,6 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Hero from "../components/Hero";
 import ProblemsSection from "../components/ProblemsSection";
-import ProblemsSectionTest from "../components/ProblemsSectionTest";
 import AboutPreview from "../components/AboutPreview";
 import ContactCTA from "../components/ContactCTA";
 import AssessmentSection from "../components/AssessmentSection";
@@ -14,7 +13,6 @@ export default function HomePage() {
       <Header />
       <Hero />
       <ProblemsSection />
-      <ProblemsSectionTest />
       <SolutionsSection />
       <AboutPreview />
       <AssessmentSection />
