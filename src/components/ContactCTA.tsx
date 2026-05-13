@@ -1,67 +1,83 @@
+"use client";
+
+import { useLanguage } from "./LanguageProvider";
+
 export default function ContactCTA() {
+  const { language } = useLanguage();
+
+  const content = {
+    pt: {
+      title: "Pronto para simplificar sua operação?",
+      subtitle:
+        "Assim mesmo: simples, objetivo e na medida certa para o seu negócio.",
+      button: "Falar com a Simplify",
+    },
+    en: {
+      title: "Ready to simplify your operation?",
+      subtitle:
+        "Just like that: simple, objective, and tailored to your business.",
+      button: "Talk to Simplify",
+    },
+    es: {
+      title: "¿Listo para simplificar su operación?",
+      subtitle:
+        "Así de simple: objetivo y hecho a la medida de su negocio.",
+      button: "Hablar con Simplify",
+    },
+  };
+
+  const section = content[language] || content.pt;
+
   return (
     <section
       style={{
         width: "100%",
-        padding: "90px 20px",
-        background: "linear-gradient(135deg, #111827 0%, #1f2937 100%)",
-        color: "#ffffff",
+        padding: "110px 20px",
+        background:
+          "linear-gradient(135deg, #111827 0%, #0f172a 100%)",
         textAlign: "center",
       }}
     >
-      <div
-        style={{
-          maxWidth: "850px",
-          margin: "0 auto",
-        }}
-      >
-        <p
-          style={{
-            fontSize: "14px",
-            fontWeight: 700,
-            letterSpacing: "1px",
-            color: "#FACC15",
-            marginBottom: "14px",
-            textTransform: "uppercase",
-          }}
-        >
-          Next Step
-        </p>
-
+      <div style={{ maxWidth: "850px", margin: "0 auto" }}>
         <h2
           style={{
-            fontSize: "40px",
-            fontWeight: 700,
-            marginBottom: "20px",
+            fontSize: "clamp(34px, 6vw, 54px)",
+            fontWeight: 800,
+            color: "#ffffff",
+            lineHeight: 1.05,
+            marginBottom: "22px",
           }}
         >
-          Ready to simplify your business?
+          {section.title}
         </h2>
 
         <p
           style={{
-            fontSize: "18px",
-            lineHeight: 1.7,
-            marginBottom: "30px",
-            color: "#d1d5db",
+            fontSize: "20px",
+            lineHeight: 1.8,
+            color: "#cbd5e1",
+            marginBottom: "40px",
           }}
         >
-          Let’s build a clearer, stronger, and more scalable structure for your company.
+          {section.subtitle}
         </p>
 
         <a
-          href="/contact"
+          href="#assessment"
           style={{
-            display: "inline-block",
-            padding: "14px 30px",
-            backgroundColor: "#DC2626",
-            color: "#ffffff",
-            borderRadius: "6px",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "#FACC15",
+            color: "#111827",
+            padding: "16px 34px",
+            borderRadius: "10px",
             fontWeight: 700,
             textDecoration: "none",
+            fontSize: "16px",
           }}
         >
-          Contact Us
+          {section.button}
         </a>
       </div>
     </section>
