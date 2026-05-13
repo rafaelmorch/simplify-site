@@ -6,14 +6,22 @@ import AboutPreview from "../components/AboutPreview";
 import ContactCTA from "../components/ContactCTA";
 import AssessmentSection from "../components/AssessmentSection";
 import SolutionsSection from "../components/SolutionsSection";
+import FadeInSection from "../components/FadeInSection";
 
 export default function HomePage() {
   return (
     <main>
       <Header />
       <Hero />
-      <ProblemsSection />
-      <SolutionsSection />
+
+      <FadeInSection>
+        <ProblemsSection />
+      </FadeInSection>
+
+      <FadeInSection>
+        <SolutionsSection />
+      </FadeInSection>
+
       <AboutPreview />
       <AssessmentSection />
       <ContactCTA />

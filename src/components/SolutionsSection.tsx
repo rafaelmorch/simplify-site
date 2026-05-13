@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLanguage } from "./LanguageProvider";
 import {
   Globe,
@@ -204,6 +204,19 @@ export default function SolutionsSection() {
 
   const section = content[language];
 
+  useEffect(() => {
+    let index = 0;
+
+    setOpenCard(section.items[0]?.title ?? null);
+
+    const interval = setInterval(() => {
+      index = (index + 1) % section.items.length;
+      setOpenCard(section.items[index].title);
+    }, 2800);
+
+    return () => clearInterval(interval);
+  }, [language]);
+
   return (
     <section
       id="services"
@@ -271,7 +284,7 @@ export default function SolutionsSection() {
                   padding: "24px",
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "space-between",
+                  justifyContent: "flex-start",
                   textAlign: "left",
                   color: "#ffffff",
                   cursor: "pointer",
@@ -316,3 +329,4 @@ export default function SolutionsSection() {
     </section>
   );
 }
+

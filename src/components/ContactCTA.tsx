@@ -39,9 +39,20 @@ export default function ContactCTA() {
       }}
     >
       <div style={{ maxWidth: "850px", margin: "0 auto" }}>
+        <p
+          style={{
+            fontSize: "20px",
+            lineHeight: 1.8,
+            color: "#cbd5e1",
+            marginBottom: "22px",
+          }}
+        >
+          {section.subtitle}
+        </p>
+
         <h2
           style={{
-            fontSize: "clamp(34px, 6vw, 54px)",
+            fontSize: "clamp(26px, 4.5vw, 40px)",
             fontWeight: 800,
             color: "#ffffff",
             lineHeight: 1.05,
@@ -51,16 +62,7 @@ export default function ContactCTA() {
           {section.title}
         </h2>
 
-        <p
-          style={{
-            fontSize: "20px",
-            lineHeight: 1.8,
-            color: "#cbd5e1",
-            marginBottom: "40px",
-          }}
-        >
-          {section.subtitle}
-        </p>
+        
 
         <a
           href="#assessment"
@@ -83,3 +85,4 @@ export default function ContactCTA() {
     </section>
   );
 }
+

@@ -101,7 +101,7 @@ export default function ProblemsSection() {
               marginBottom: "20px",
             }}
           >
-            {section.title}
+            <span className="typing-title">{section.title}</span>
           </h2>
 
           <p
