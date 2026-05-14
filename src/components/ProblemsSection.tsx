@@ -7,36 +7,6 @@ export default function ProblemsSection() {
   const { language } = useLanguage();
   const [typedTitle, setTypedTitle] = useState("");
 
-  useEffect(() => {
-    let typingInterval: ReturnType<typeof setInterval>;
-    let restartTimeout: ReturnType<typeof setTimeout>;
-
-    const runTyping = () => {
-      let index = 0;
-      setTypedTitle("");
-
-      typingInterval = setInterval(() => {
-        index++;
-        setTypedTitle(content[language]?.title.slice(0, index) || "");
-
-        if (index >= (content[language]?.title.length || 0)) {
-          clearInterval(typingInterval);
-
-          restartTimeout = setTimeout(() => {
-            runTyping();
-          }, 6000);
-        }
-      }, 34);
-    };
-
-    runTyping();
-
-    return () => {
-      clearInterval(typingInterval);
-      clearTimeout(restartTimeout);
-    };
-  }, [language]);
-
   const content = {
     pt: {
       label: "Problemas que resolvemos",
@@ -84,6 +54,36 @@ export default function ProblemsSection() {
 
   const section = content[language] || content.pt;
 
+  useEffect(() => {
+    let typingInterval: ReturnType<typeof setInterval>;
+    let restartTimeout: ReturnType<typeof setTimeout>;
+
+    const runTyping = () => {
+      let index = 0;
+      setTypedTitle("");
+
+      typingInterval = setInterval(() => {
+        index++;
+        setTypedTitle(section.title.slice(0, index));
+
+        if (index >= section.title.length) {
+          clearInterval(typingInterval);
+
+          restartTimeout = setTimeout(() => {
+            runTyping();
+          }, 6000);
+        }
+      }, 34);
+    };
+
+    runTyping();
+
+    return () => {
+      clearInterval(typingInterval);
+      clearTimeout(restartTimeout);
+    };
+  }, [section.title]);
+
   return (
     <section
       id="problems"
@@ -129,11 +129,21 @@ export default function ProblemsSection() {
               fontSize: "clamp(34px, 6vw, 50px)",
               fontWeight: 900,
               color: "#111827",
-              lineHeight: 1.05, minHeight: "2.1em",
+              lineHeight: 1.05,
+              minHeight: "2.1em",
               marginBottom: "20px",
             }}
           >
-            {typedTitle}<span style={{ color: "#111827", fontWeight: 300, animation: "blinkCursor 0.8s step-end infinite" }}>|</span>
+            {typedTitle}
+            <span
+              style={{
+                color: "#111827",
+                fontWeight: 300,
+                animation: "blinkCursor 0.8s step-end infinite",
+              }}
+            >
+              |
+            </span>
           </h2>
 
           <p
@@ -157,6 +167,14 @@ export default function ProblemsSection() {
           {section.items.map((item) => (
             <div
               key={item.title}
+              onMouseEnter={(e) => {
+                const icon = e.currentTarget.querySelector("img");
+                if (icon) icon.style.transform = "translateX(80px)";
+              }}
+              onMouseLeave={(e) => {
+                const icon = e.currentTarget.querySelector("img");
+                if (icon) icon.style.transform = "translateX(0)";
+              }}
               style={{
                 background: "rgba(255,255,255,0.82)",
                 border: "1.2px solid rgba(255,229,0,0.9)",
@@ -174,9 +192,10 @@ export default function ProblemsSection() {
                 src={item.icon}
                 alt=""
                 style={{
-                  width: "96px",
-                  height: "96px",
+                  width: "80px",
+                  height: "80px",
                   objectFit: "contain",
+                  transition: "transform 0.45s ease",
                 }}
               />
 
@@ -211,4 +230,3 @@ export default function ProblemsSection() {
     </section>
   );
 }
-

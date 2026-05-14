@@ -340,3 +340,21 @@ h3,
     opacity: 0;
   }
 }
+
+.problem-card-hover {
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.problem-card-hover:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255,229,0,1) !important;
+  box-shadow: 0 24px 70px rgba(17,24,39,0.13), 0 0 30px rgba(255,229,0,0.16) !important;
+}
+
+.problem-card-hover:hover .problem-icon-slide {
+  transform: translateX(28px);
+}
+
+.problem-icon-slide {
+  transition: transform 0.45s ease;
+}
