@@ -334,3 +334,9 @@ h3,
     opacity: 0;
   }
 }
+
+@keyframes blinkCursor {
+  50% {
+    opacity: 0;
+  }
+}

@@ -1,9 +1,41 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useLanguage } from "./LanguageProvider";
 
 export default function ProblemsSection() {
   const { language } = useLanguage();
+  const [typedTitle, setTypedTitle] = useState("");
+
+  useEffect(() => {
+    let typingInterval: ReturnType<typeof setInterval>;
+    let restartTimeout: ReturnType<typeof setTimeout>;
+
+    const runTyping = () => {
+      let index = 0;
+      setTypedTitle("");
+
+      typingInterval = setInterval(() => {
+        index++;
+        setTypedTitle(content[language]?.title.slice(0, index) || "");
+
+        if (index >= (content[language]?.title.length || 0)) {
+          clearInterval(typingInterval);
+
+          restartTimeout = setTimeout(() => {
+            runTyping();
+          }, 6000);
+        }
+      }, 34);
+    };
+
+    runTyping();
+
+    return () => {
+      clearInterval(typingInterval);
+      clearTimeout(restartTimeout);
+    };
+  }, [language]);
 
   const content = {
     pt: {
@@ -97,11 +129,11 @@ export default function ProblemsSection() {
               fontSize: "clamp(34px, 6vw, 50px)",
               fontWeight: 900,
               color: "#111827",
-              lineHeight: 1.05,
+              lineHeight: 1.05, minHeight: "2.1em",
               marginBottom: "20px",
             }}
           >
-            <span className="typing-title">{section.title}</span>
+            {typedTitle}<span style={{ color: "#111827", fontWeight: 300, animation: "blinkCursor 0.8s step-end infinite" }}>|</span>
           </h2>
 
           <p
@@ -179,3 +211,4 @@ export default function ProblemsSection() {
     </section>
   );
 }
+

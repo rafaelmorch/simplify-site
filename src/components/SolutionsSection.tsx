@@ -24,6 +24,7 @@ const iconProps = {
 export default function SolutionsSection() {
   const { language } = useLanguage();
   const [openCard, setOpenCard] = useState<string | null>(null);
+  const [pauseAuto, setPauseAuto] = useState(false);
 
   const content = {
     pt: {
@@ -209,13 +210,15 @@ export default function SolutionsSection() {
 
     setOpenCard(section.items[0]?.title ?? null);
 
+    if (pauseAuto) return;
+
     const interval = setInterval(() => {
       index = (index + 1) % section.items.length;
       setOpenCard(section.items[index].title);
     }, 2800);
 
     return () => clearInterval(interval);
-  }, [language]);
+  }, [language, pauseAuto]);
 
   return (
     <section
@@ -262,7 +265,7 @@ export default function SolutionsSection() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))",
-            gap: "18px",
+            gap: "18px", alignItems: "start",
           }}
         >
           {section.items.map((item) => {
@@ -271,9 +274,15 @@ export default function SolutionsSection() {
             return (
               <button
                 key={item.title}
-                onClick={() => setOpenCard(isOpen ? null : item.title)}
+                onClick={() => {
+                  setPauseAuto(true);
+                  setOpenCard(isOpen ? null : item.title);
+                  setTimeout(() => {
+                    setPauseAuto(false);
+                  }, 15000);
+                }}
                 style={{
-                  minHeight: isOpen ? "220px" : "150px",
+                  width: "100%", minWidth: 0, minHeight: isOpen ? "220px" : "150px",
                   border: isOpen
                     ? "1px solid rgba(250,204,21,0.65)"
                     : "1px solid rgba(250,204,21,0.28)",
@@ -292,7 +301,7 @@ export default function SolutionsSection() {
                     ? "0 0 34px rgba(250,204,21,0.16), inset 0 0 22px rgba(250,204,21,0.06)"
                     : "0 0 28px rgba(250,204,21,0.06), inset 0 0 18px rgba(250,204,21,0.04)",
                   backdropFilter: "blur(12px)",
-                  transition: "all 0.3s ease",
+                  transition: "min-height 0.35s ease, background 0.3s ease, border 0.3s ease, box-shadow 0.3s ease",
                 }}
               >
                 <div>{item.icon}</div>
@@ -329,4 +338,7 @@ export default function SolutionsSection() {
     </section>
   );
 }
+
+
+
 
