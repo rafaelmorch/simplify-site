@@ -265,7 +265,7 @@ export default function SolutionsSection() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))",
-            gap: "18px", height: "680px", overflow: "visible", alignItems: "start", alignItems: "start",
+            gap: "18px", height: "680px", overflow: "visible", alignItems: "start",
           }}
         >
           {section.items.map((item) => {
