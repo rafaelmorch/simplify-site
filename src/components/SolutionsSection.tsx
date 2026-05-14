@@ -225,7 +225,7 @@ export default function SolutionsSection() {
       id="services"
       style={{
         width: "100%",
-        padding: "100px 20px",
+        padding: "100px 20px", minHeight: "1080px", maxHeight: "1080px", overflow: "visible",
         backgroundColor: "#0b1220",
         color: "#ffffff",
       }}
@@ -265,7 +265,7 @@ export default function SolutionsSection() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))",
-            gap: "18px", height: "680px", overflow: "visible", alignItems: "start",
+            gap: "18px", alignItems: "start", paddingBottom: "120px",
           }}
         >
           {section.items.map((item) => {
