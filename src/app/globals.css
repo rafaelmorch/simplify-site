@@ -372,3 +372,20 @@ h3,
     overflow: visible !important;
   }
 }
+
+@media (max-width: 768px) {
+  .fade-up-section,
+  [style*="opacity: 0"] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #services {
+    min-height: auto !important;
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+}
