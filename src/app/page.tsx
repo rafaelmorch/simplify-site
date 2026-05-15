@@ -6,7 +6,6 @@ import AboutPreview from "../components/AboutPreview";
 import ContactCTA from "../components/ContactCTA";
 import AssessmentSection from "../components/AssessmentSection";
 import SolutionsSection from "../components/SolutionsSection";
-import FadeInSection from "../components/FadeInSection";
 
 export default function HomePage() {
   return (
@@ -14,13 +13,9 @@ export default function HomePage() {
       <Header />
       <Hero />
 
-      <FadeInSection>
-        <ProblemsSection />
-      </FadeInSection>
+      <ProblemsSection />
 
-      <FadeInSection>
-        <SolutionsSection />
-      </FadeInSection>
+      <SolutionsSection />
 
       <AboutPreview />
       <AssessmentSection />
