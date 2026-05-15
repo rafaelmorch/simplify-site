@@ -2,9 +2,13 @@
 
 import { useState } from "react";
 import { useLanguage } from "./LanguageProvider";
+import { supabase } from "../lib/supabase";
+import ReactMarkdown from "react-markdown";
 
 export default function AssessmentSection() {
   const { language } = useLanguage();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
@@ -66,7 +70,16 @@ export default function AssessmentSection() {
       });
 
       const data = await res.json();
-      setResponse(data.result || "Não foi possível gerar a análise agora.");
+      const aiResult = data.result || "Não foi possível gerar a análise agora.";
+
+      setResponse(aiResult);
+
+      await supabase.from("assessment_leads").insert({
+        name,
+        email,
+        message,
+        ai_response: aiResult,
+      });
     } catch {
       setResponse("Erro ao conectar com a IA. Tente novamente.");
     } finally {
@@ -221,6 +234,8 @@ export default function AssessmentSection() {
     </section>
   );
 }
+
+
 
 
 
