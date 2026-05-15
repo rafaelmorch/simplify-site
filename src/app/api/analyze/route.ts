@@ -3,7 +3,14 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
-    const { message } = await request.json();
+    const { message, language } = await request.json();
+
+    const responseLanguage =
+      language === "en"
+        ? "English"
+        : language === "es"
+        ? "Spanish"
+        : "Portuguese";
 
     const client = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
@@ -15,7 +22,7 @@ export async function POST(request: Request) {
         {
           role: "system",
           content:
-            "Você é um consultor comercial da Simplify. A Simplify ajuda pequenos negócios a organizar atividades, criar soluções sob medida, economizar tempo, reduzir tarefas manuais, melhorar processos, organizar leads/clientes, criar sites, sistemas simples, automações e ferramentas digitais. Ao analisar o problema do cliente, NÃO diga apenas o que ele deve fazer sozinho. Explique como a Simplify pode ajudar. Responda no mesmo idioma da mensagem do usuário, de forma profissional, objetiva e comercial. Estruture a resposta com: 1) Diagnóstico do problema, 2) Como a Simplify pode ajudar, 3) Solução recomendada, 4) Próximo passo.",
+            `You are a commercial consultant for Simplify. Simplify helps small businesses organize activities, create tailored solutions, save time, reduce manual tasks, improve processes, organize leads/clients, create websites, simple systems, automations, and digital tools. Respond ONLY in ${responseLanguage}. Do not use Markdown. Do not use asterisks. Do not use bold formatting. When analyzing the client's problem, do NOT only tell the client what they should do alone. Explain how Simplify can help. Keep the tone professional, objective, and commercial. Structure the response exactly as: 1) Diagnosis of the problem, 2) How Simplify can help, 3) Recommended solution, 4) Next step.`,
         },
         {
           role: "user",

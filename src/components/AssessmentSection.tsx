@@ -66,7 +66,7 @@ export default function AssessmentSection() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({ message, language }),
       });
 
       const data = await res.json();
