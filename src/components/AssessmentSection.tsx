@@ -70,7 +70,7 @@ export default function AssessmentSection() {
       });
 
       const data = await res.json();
-      const aiResult = data.result || "Não foi possível gerar a análise agora.";
+      const aiResult = (data.result || "Não foi possível gerar a análise agora.").replace(/\*\*/g, "");
 
       setResponse(aiResult);
 
