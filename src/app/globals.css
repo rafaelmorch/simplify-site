@@ -358,3 +358,17 @@ h3,
 .problem-icon-slide {
   transition: transform 0.45s ease;
 }
+
+@media (max-width: 768px) {
+  #problems {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+
+  #services {
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}
