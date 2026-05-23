@@ -1,8 +1,17 @@
 "use client";
 
+import { useEffect } from "react";
 import ServicesCarousel from "./ServicesCarousel";
 
 export default function Hero() {
+  useEffect(() => {
+    const videos = document.querySelectorAll("video");
+
+    videos.forEach((video) => {
+      video.play().catch(() => {});
+    });
+  }, []);
+
   return (
     <section
       id="home"
@@ -14,7 +23,6 @@ export default function Hero() {
         backgroundColor: "#000",
       }}
     >
-      {/* Desktop Video */}
       <video
         autoPlay
         loop
@@ -33,7 +41,6 @@ export default function Hero() {
         <source src="/videos/hero-desktop.mp4" type="video/mp4" />
       </video>
 
-      {/* Mobile Video */}
       <video
         autoPlay
         loop
