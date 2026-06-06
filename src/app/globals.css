@@ -389,3 +389,97 @@ h3,
     overflow: visible !important;
   }
 }
+
+@media (max-width: 900px) {
+  .who-we-are-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .who-we-are-grid img {
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  .who-we-are-cards {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* WHO WE ARE EFFECTS */
+
+.who-image {
+  opacity: 0;
+  transform: translateX(-40px) scale(1.05);
+  animation: whoImageReveal 0.8s ease forwards;
+}
+
+.who-text {
+  opacity: 0;
+  transform: translateX(40px);
+  animation: whoTextReveal 0.8s ease forwards;
+}
+
+.who-highlight {
+  position: relative;
+}
+
+.who-highlight::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 0;
+  width: 4px;
+  height: 0;
+  background: #facc15;
+  animation: whoLineGrow 0.8s ease forwards;
+}
+
+.who-card-1,
+.who-card-2,
+.who-card-3 {
+  opacity: 0;
+  transform: translateY(25px);
+}
+
+.who-card-1 {
+  animation: whoCardReveal 0.6s ease forwards;
+  animation-delay: 0.1s;
+}
+
+.who-card-2 {
+  animation: whoCardReveal 0.6s ease forwards;
+  animation-delay: 0.25s;
+}
+
+.who-card-3 {
+  animation: whoCardReveal 0.6s ease forwards;
+  animation-delay: 0.4s;
+}
+
+@keyframes whoImageReveal {
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes whoTextReveal {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes whoCardReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes whoLineGrow {
+  to {
+    height: 100%;
+  }
+}
