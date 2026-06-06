@@ -1,15 +1,48 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import ServicesCarousel from "./ServicesCarousel";
 
 export default function Hero() {
-  useEffect(() => {
-    const videos = document.querySelectorAll("video");
+  const desktopVideoRef = useRef<HTMLVideoElement | null>(null);
+  const mobileVideoRef = useRef<HTMLVideoElement | null>(null);
 
-    videos.forEach((video) => {
-      video.play().catch(() => {});
-    });
+  useEffect(() => {
+    const playVideos = () => {
+      const videos = [desktopVideoRef.current, mobileVideoRef.current];
+
+      videos.forEach((video) => {
+        if (!video) return;
+
+        video.muted = true;
+        video.defaultMuted = true;
+        video.playsInline = true;
+        video.setAttribute("muted", "");
+        video.setAttribute("playsinline", "");
+        video.setAttribute("webkit-playsinline", "");
+
+        const playPromise = video.play();
+
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {});
+        }
+      });
+    };
+
+    playVideos();
+
+    const timer1 = setTimeout(playVideos, 400);
+    const timer2 = setTimeout(playVideos, 1200);
+
+    document.addEventListener("touchstart", playVideos, { once: true });
+    document.addEventListener("click", playVideos, { once: true });
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      document.removeEventListener("touchstart", playVideos);
+      document.removeEventListener("click", playVideos);
+    };
   }, []);
 
   return (
@@ -24,10 +57,12 @@ export default function Hero() {
       }}
     >
       <video
+        ref={desktopVideoRef}
         autoPlay
         loop
         muted
         playsInline
+        preload="auto"
         className="hero-video-desktop"
         style={{
           position: "absolute",
@@ -42,10 +77,12 @@ export default function Hero() {
       </video>
 
       <video
+        ref={mobileVideoRef}
         autoPlay
         loop
         muted
         playsInline
+        preload="auto"
         className="hero-video-mobile"
         style={{
           position: "absolute",
