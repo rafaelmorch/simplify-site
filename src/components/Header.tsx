@@ -21,18 +21,21 @@ export default function Header() {
       { label: "Soluções", href: "#services" },
       { label: "Sobre", href: "#about" },
       { label: "Diagnóstico", href: "#assessment" },
+{ label: "Quem Somos", href: "#who-we-are" },
     ],
     en: [
       { label: "Problems", href: "#problems" },
       { label: "Solutions", href: "#services" },
       { label: "About", href: "#about" },
       { label: "Assessment", href: "#assessment" },
+{ label: "Who We Are", href: "#who-we-are" },
     ],
     es: [
       { label: "Problemas", href: "#problems" },
       { label: "Soluciones", href: "#services" },
       { label: "Sobre", href: "#about" },
       { label: "Diagnóstico", href: "#assessment" },
+  { label: "Quiénes Somos", href: "#who-we-are" },
     ],
   };
 
@@ -139,3 +142,4 @@ export default function Header() {
     </header>
   );
 }
+

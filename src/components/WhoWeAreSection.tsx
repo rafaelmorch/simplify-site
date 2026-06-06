@@ -153,7 +153,7 @@ export default function WhoWeAreSection() {
           className="who-we-are-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "650px 1fr",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
             gap: "54px",
             alignItems: "center",
           }}
@@ -239,7 +239,7 @@ export default function WhoWeAreSection() {
           className="who-we-are-cards"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
+            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
             gap: "18px",
             marginTop: "46px",
             marginBottom: "38px",
@@ -251,7 +251,7 @@ export default function WhoWeAreSection() {
               style={{
                 border: "1px solid rgba(250,204,21,0.55)",
                 borderRadius: "12px",
-                padding: "24px",
+                padding: "24px", boxSizing: "border-box", width: "100%", minWidth: 0,
                 background: "rgba(255,255,255,0.04)",
                 boxShadow: "0 14px 45px rgba(0,0,0,0.25)",
                 opacity: visible ? 1 : 0,
@@ -272,7 +272,7 @@ export default function WhoWeAreSection() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
+            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
             gap: "18px",
           }}
         >
@@ -281,7 +281,7 @@ export default function WhoWeAreSection() {
               key={`${label}-${index}`}
               style={{
                 textAlign: "center",
-                padding: "26px",
+                padding: "26px", boxSizing: "border-box", width: "100%", minWidth: 0,
                 borderRadius: "14px",
                 background: "rgba(255,255,255,0.04)",
                 border: "1px solid rgba(250,204,21,0.25)",
@@ -317,3 +317,4 @@ export default function WhoWeAreSection() {
     </section>
   );
 }
+
