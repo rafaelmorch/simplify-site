@@ -21,6 +21,8 @@ export default function Hero() {
         video.setAttribute("playsinline", "");
         video.setAttribute("webkit-playsinline", "");
 
+        video.load();
+
         const playPromise = video.play();
 
         if (playPromise !== undefined) {
@@ -31,15 +33,21 @@ export default function Hero() {
 
     playVideos();
 
-    const timer1 = setTimeout(playVideos, 400);
-    const timer2 = setTimeout(playVideos, 1200);
+    const timer1 = setTimeout(playVideos, 300);
+    const timer2 = setTimeout(playVideos, 1000);
+    const timer3 = setTimeout(playVideos, 2000);
 
+    window.addEventListener("pageshow", playVideos);
+    document.addEventListener("visibilitychange", playVideos);
     document.addEventListener("touchstart", playVideos, { once: true });
     document.addEventListener("click", playVideos, { once: true });
 
     return () => {
       clearTimeout(timer1);
       clearTimeout(timer2);
+      clearTimeout(timer3);
+      window.removeEventListener("pageshow", playVideos);
+      document.removeEventListener("visibilitychange", playVideos);
       document.removeEventListener("touchstart", playVideos);
       document.removeEventListener("click", playVideos);
     };
@@ -58,6 +66,7 @@ export default function Hero() {
     >
       <video
         ref={desktopVideoRef}
+        src="/videos/hero-desktop.mp4"
         autoPlay
         loop
         muted
@@ -72,12 +81,11 @@ export default function Hero() {
           top: 0,
           left: 0,
         }}
-      >
-        <source src="/videos/hero-desktop.mp4" type="video/mp4" />
-      </video>
+      />
 
       <video
         ref={mobileVideoRef}
+        src="/videos/hero-mobile.mp4"
         autoPlay
         loop
         muted
@@ -92,9 +100,7 @@ export default function Hero() {
           top: 0,
           left: 0,
         }}
-      >
-        <source src="/videos/hero-mobile.mp4" type="video/mp4" />
-      </video>
+      />
 
       <ServicesCarousel />
     </section>
