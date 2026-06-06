@@ -483,3 +483,21 @@ h3,
     height: 100%;
   }
 }
+
+@media (max-width: 900px) {
+  .who-stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #services {
+    min-height: auto !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #services {
+    min-height: 1900px !important;
+  }
+}

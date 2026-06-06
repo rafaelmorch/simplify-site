@@ -60,7 +60,7 @@ export default function WhoWeAreSection() {
           runCounters();
 
           if (!restartInterval) {
-            restartInterval = setInterval(runCounters, 4000);
+            restartInterval = setInterval(runCounters, 5000);
           }
         }
       },
