@@ -142,10 +142,12 @@ export default function AssessmentSection() {
           <input type="hidden" name="form-name" value="assessment" />
 
           <input
-            name="name"
-            type="text"
-            placeholder={content.name}
-            required
+  name="email"
+  type="email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  placeholder={content.email}
+  required
             style={{
               padding: "14px",
               border: "1px solid #e5e7eb",
