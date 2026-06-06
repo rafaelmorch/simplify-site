@@ -508,3 +508,20 @@ h3,
     width: 100% !important;
   }
 }
+
+@media (max-width: 900px) {
+  #who-we-are .who-we-are-grid,
+  #who-we-are .who-we-are-cards,
+  #who-we-are .who-stats-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+  }
+
+  #who-we-are img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+}
