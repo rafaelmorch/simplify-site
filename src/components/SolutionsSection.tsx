@@ -225,7 +225,7 @@ export default function SolutionsSection() {
       id="services"
       style={{
         width: "100%",
-        padding: "100px 20px", minHeight: "1080px", minHeight: "1080px", minHeight: "1080px", maxHeight: "1080px", overflow: "visible",
+        padding: "100px 20px", minHeight: "1080px", maxHeight: "1080px", overflow: "visible",
         backgroundColor: "#0b1220",
         color: "#ffffff",
       }}
@@ -338,6 +338,7 @@ export default function SolutionsSection() {
     </section>
   );
 }
+
 
 
 
