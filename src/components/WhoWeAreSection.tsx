@@ -167,7 +167,7 @@ export default function WhoWeAreSection() {
               height: "500px",
               minHeight: "500px",
               borderRadius: "14px",
-              objectFit: "cover",
+              objectFit: "contain",
               boxShadow: "0 24px 70px rgba(17,24,39,0.14)",
               opacity: visible ? 1 : 0,
               transform: visible ? "translateX(0) scale(1)" : "translateX(-40px) scale(1.05)",
