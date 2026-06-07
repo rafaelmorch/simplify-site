@@ -7,8 +7,9 @@ import ReactMarkdown from "react-markdown";
 
 export default function AssessmentSection() {
   const { language } = useLanguage();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+
+  const [leadName, setLeadName] = useState("");
+  const [leadEmail, setLeadEmail] = useState("");
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
@@ -55,7 +56,7 @@ export default function AssessmentSection() {
   const content = text[language];
 
   const handleAnalyze = async () => {
-    if (!message) return;
+    if (!leadName.trim() || !leadEmail.trim() || !message.trim()) return;
 
     setLoading(true);
     setResponse("");
@@ -75,9 +76,9 @@ export default function AssessmentSection() {
       setResponse(aiResult);
 
       await supabase.from("assessment_leads").insert({
-        name: name.trim(),
-        email: email.trim(),
-        message,
+        name: leadName.trim(),
+        email: leadEmail.trim(),
+        message: message.trim(),
         ai_response: aiResult,
       });
     } catch {
@@ -93,18 +94,27 @@ export default function AssessmentSection() {
       style={{
         width: "100%",
         padding: "100px 20px",
-        backgroundColor: "#f9fafb",
+        background: "#f8fafc",
       }}
     >
-      <div style={{ maxWidth: "850px", margin: "0 auto", textAlign: "center" }}>
+      <div
+        style={{
+          maxWidth: "820px",
+          margin: "0 auto",
+          background: "#ffffff",
+          borderRadius: "18px",
+          padding: "42px",
+          boxShadow: "0 20px 60px rgba(17,24,39,0.08)",
+        }}
+      >
         <p
           style={{
             fontSize: "14px",
-            fontWeight: 700,
+            fontWeight: 800,
             letterSpacing: "1px",
             color: "#DC2626",
-            marginBottom: "14px",
             textTransform: "uppercase",
+            marginBottom: "12px",
           }}
         >
           {content.label}
@@ -112,11 +122,11 @@ export default function AssessmentSection() {
 
         <h2
           style={{
-            fontSize: "clamp(32px, 6vw, 44px)",
-            fontWeight: 700,
+            fontSize: "clamp(32px, 6vw, 46px)",
+            fontWeight: 900,
             color: "#111827",
-            marginBottom: "18px",
-            lineHeight: 1.15,
+            lineHeight: 1.08,
+            marginBottom: "16px",
           }}
         >
           {content.title}
@@ -124,10 +134,10 @@ export default function AssessmentSection() {
 
         <p
           style={{
-            fontSize: "18px",
             color: "#4b5563",
+            fontSize: "17px",
             lineHeight: 1.7,
-            marginBottom: "34px",
+            marginBottom: "28px",
           }}
         >
           {content.subtitle}
@@ -142,10 +152,10 @@ export default function AssessmentSection() {
           <input type="hidden" name="form-name" value="assessment" />
 
           <input
-            name="name"
+            name="lead_name"
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={leadName}
+            onChange={(e) => setLeadName(e.target.value)}
             placeholder={content.name}
             required
             style={{
@@ -156,10 +166,10 @@ export default function AssessmentSection() {
           />
 
           <input
-            name="email"
+            name="lead_email"
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={leadEmail}
+            onChange={(e) => setLeadEmail(e.target.value)}
             placeholder={content.email}
             required
             style={{
@@ -177,10 +187,11 @@ export default function AssessmentSection() {
             required
             style={{
               width: "100%",
-              height: "140px",
-              padding: "15px",
+              minHeight: "150px",
+              padding: "14px",
               border: "1px solid #e5e7eb",
               borderRadius: "6px",
+              resize: "vertical",
             }}
           />
 
@@ -189,66 +200,48 @@ export default function AssessmentSection() {
             onClick={handleAnalyze}
             disabled={loading}
             style={{
-              backgroundColor: "#DC2626",
-              color: "#fff",
-              padding: "14px 28px",
-              borderRadius: "6px",
-              fontWeight: 700,
+              padding: "15px 24px",
+              borderRadius: "8px",
               border: "none",
+              backgroundColor: "#111827",
+              color: "#ffffff",
+              fontWeight: 800,
               cursor: loading ? "not-allowed" : "pointer",
-              opacity: loading ? 0.7 : 1,
             }}
           >
             {loading ? content.loading : content.analyze}
           </button>
 
-          <button
-            type="submit"
+          <p
             style={{
-              backgroundColor: "#111827",
-              color: "#fff",
-              padding: "14px 28px",
-              borderRadius: "6px",
+              marginTop: "-4px",
+              textAlign: "center",
+              fontSize: "12px",
+              letterSpacing: "1px",
+              color: "rgba(17,24,39,0.55)",
               fontWeight: 700,
-              border: "none",
-              cursor: "pointer",
             }}
           >
-            {content.send}
-          </button>
+            by Simplify IA
+          </p>
         </form>
 
         {response && (
           <div
             style={{
-              marginTop: "30px",
-              backgroundColor: "#ffffff",
-              border: "1px solid #e5e7eb",
+              marginTop: "28px",
               padding: "22px",
-              borderRadius: "6px",
-              textAlign: "left",
-              whiteSpace: "pre-line",
+              borderRadius: "12px",
+              background: "#f1f5f9",
+              color: "#111827",
+              lineHeight: 1.7,
             }}
           >
             <strong>{content.result}</strong>
-            <p style={{ marginTop: "10px", color: "#4b5563" }}>{response}</p>
+            <ReactMarkdown>{response}</ReactMarkdown>
           </div>
         )}
       </div>
     </section>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
