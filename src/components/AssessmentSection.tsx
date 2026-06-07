@@ -74,18 +74,12 @@ export default function AssessmentSection() {
 
       setResponse(aiResult);
 
-      const form = document.querySelector(
-  'form[name="assessment"]'
-) as HTMLFormElement | null;
-
-const formData = form ? new FormData(form) : null;
-
-await supabase.from("assessment_leads").insert({
-  name: String(formData?.get("name") || ""),
-  email: String(formData?.get("email") || ""),
-  message,
-  ai_response: aiResult,
-});
+      await supabase.from("assessment_leads").insert({
+        name: name.trim(),
+        email: email.trim(),
+        message,
+        ai_response: aiResult,
+      });
     } catch {
       setResponse("Erro ao conectar com a IA. Tente novamente.");
     } finally {
@@ -244,6 +238,7 @@ await supabase.from("assessment_leads").insert({
     </section>
   );
 }
+
 
 
 
