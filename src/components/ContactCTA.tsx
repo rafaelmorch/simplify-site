@@ -8,20 +8,17 @@ export default function ContactCTA() {
   const content = {
     pt: {
       title: "Pronto para simplificar sua operação?",
-      subtitle:
-        "Assim mesmo: simples, objetivo e na medida certa para o seu negócio.",
+      subtitle: "Assim mesmo: simples, objetivo e na medida certa para o seu negócio.",
       button: "Falar com a Simplify",
     },
     en: {
       title: "Ready to simplify your operation?",
-      subtitle:
-        "Just like that: simple, objective, and tailored to your business.",
+      subtitle: "Just like that: simple, objective, and tailored to your business.",
       button: "Talk to Simplify",
     },
     es: {
       title: "¿Listo para simplificar su operación?",
-      subtitle:
-        "Así de simple: objetivo y hecho a la medida de su negocio.",
+      subtitle: "Así de simple: objetivo y hecho a la medida de su negocio.",
       button: "Hablar con Simplify",
     },
   };
@@ -32,19 +29,19 @@ export default function ContactCTA() {
     <section
       style={{
         width: "100%",
-        padding: "110px 20px",
-        background:
-          "linear-gradient(135deg, #111827 0%, #0f172a 100%)",
+        padding: "100px 20px",
+        background: "#0b1220",
+        color: "#ffffff",
         textAlign: "center",
       }}
     >
-      <div style={{ maxWidth: "850px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "820px", margin: "0 auto" }}>
         <p
           style={{
-            fontSize: "20px",
-            lineHeight: 1.8,
+            fontSize: "18px",
+            lineHeight: 1.7,
             color: "#cbd5e1",
-            marginBottom: "22px",
+            marginBottom: "14px",
           }}
         >
           {section.subtitle}
@@ -52,17 +49,14 @@ export default function ContactCTA() {
 
         <h2
           style={{
-            fontSize: "clamp(26px, 4.5vw, 40px)",
-            fontWeight: 800,
-            color: "#ffffff",
+            fontSize: "clamp(34px, 6vw, 52px)",
+            fontWeight: 900,
             lineHeight: 1.05,
-            marginBottom: "22px",
+            marginBottom: "30px",
           }}
         >
           {section.title}
         </h2>
-
-        
 
         <a
           href="#assessment"
@@ -81,8 +75,45 @@ export default function ContactCTA() {
         >
           {section.button}
         </a>
+
+        <div
+          style={{
+            marginTop: "22px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "18px",
+            flexWrap: "wrap",
+            fontSize: "15px",
+          }}
+        >
+          <a
+            href="mailto:contact@simplifyps.com"
+            style={{
+              color: "#ffffff",
+              textDecoration: "none",
+              fontWeight: 700,
+            }}
+          >
+            contact@simplifyps.com
+          </a>
+
+          <span style={{ color: "rgba(255,255,255,0.35)" }}>|</span>
+
+          <a
+            href="https://wa.me/14079063563"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: "#ffffff",
+              textDecoration: "none",
+              fontWeight: 700,
+            }}
+          >
+            WhatsApp: +1 (407) 906-3563
+          </a>
+        </div>
       </div>
     </section>
   );
 }
-
